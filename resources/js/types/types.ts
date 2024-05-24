@@ -3,4 +3,5 @@ export interface Node {
     title: string;
     description: number;
     image: string;
+    primary: boolean;
 }
