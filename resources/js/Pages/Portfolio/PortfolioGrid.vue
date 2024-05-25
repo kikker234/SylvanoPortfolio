@@ -75,38 +75,20 @@ fetchNodes();
 </script>
 
 <template>
-    <div
-        class="grid"
-        :style="{
-            'grid-template-columns': 'repeat(' + size + ', 1fr)',
-            'grid-template-rows': 'repeat(' + size + ', 1fr)'
-        }">
+    <div class="grid grid-cols-5 gap-2 grid-rows-5 w-fit h-fit bg-white p-3 rounded-lg shadow-lg">
         <div
+            class="relative w-36 h-36"
             v-for="node in nodes"
-            :key="node.title"
-            :class="{ 'is-primary': node.primary }">
-            {{ node.title }}
+            :key="node.title">
+            <img
+                :src="node.image"
+                alt="node.title"
+                class="w-full h-full object-cover rounded-lg">
+            <div
+                class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 hover:opacity-100 rounded-lg transition-opacity duration-300">
+                <span class="text-white text-center">{{ node.title }}</span>
+            </div>
         </div>
     </div>
+
 </template>
-
-<style scoped>
-.grid {
-    display: grid;
-    gap: 10px; /* Adjust as necessary */
-}
-
-.grid > * {
-    width: 100%;
-    aspect-ratio: 1/1;
-}
-
-.position {
-    display: none; /* Hide the position div, adjust or remove if not needed */
-}
-
-.is-primary {
-    grid-column: span 2;
-    grid-row: span 2;
-}
-</style>

@@ -1,22 +1,22 @@
 <script setup lang="ts">
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head } from '@inertiajs/vue3';
+import {Head} from '@inertiajs/vue3';
 import PortfolioGrid from "@/Pages/Portfolio/PortfolioGrid.vue";
 </script>
 
 <template>
-    <Head title="Dashboard" />
+    <Head title="Dashboard"/>
 
     <AuthenticatedLayout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">Preview</h2>
         </template>
 
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+        <div class="py-10">
+            <div class="max-w-7xl mx-auto sm:px-2 lg:px-6">
 
-                    <PortfolioGrid />
+                <div class="flex justify-center">
+                    <PortfolioGrid/>
                 </div>
             </div>
         </div>
