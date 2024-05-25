@@ -23,6 +23,9 @@ jobs:
           ssh -o StrictHostKeyChecking=no root@85.215.185.110 << 'EOF'
             cd /sylvano-portfolio/SylvanoPortfolio
             git pull origin main
+
+            php artisan migrate
+
             npm install
             npm run build
             systemctl reload nginx
