@@ -24,9 +24,11 @@
             </div>
 
             <div class="">
-                <InputLabel>Primary</InputLabel>
-                <input type="checkbox" class="mt-1 block w-3/4" v-model="form.primary"/>
-                <InputError :message="form.errors.primary" class="mt-2"/>
+                <!--<div class="flex items-center mt-2 gap-3">
+                    <InputCheckbox v-model="form.primary"/>
+                    <InputLabel>Primary</InputLabel>
+                </div>
+                <InputError :message="form.errors.primary" class="mt-2"/>-->
             </div>
 
             <div class="mt-6 flex justify-end">
@@ -38,14 +40,15 @@
 </template>
 
 <script setup lang="ts">
-import { ref, nextTick, defineProps, watch } from 'vue';
-import { useForm } from "@inertiajs/vue3";
+import {ref, nextTick, defineProps, watch} from 'vue';
+import {useForm} from "@inertiajs/vue3";
 import Modal from "@/Components/Modal.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import TextInput from "@/Components/TextInput.vue";
 import DangerButton from "@/Components/DangerButton.vue";
 import InputError from "@/Components/InputError.vue";
+import InputCheckbox from "@/Components/InputCheckbox.vue";
 
 const props = defineProps({
     show: Boolean,
@@ -69,7 +72,7 @@ watch(() => props.node, (newNode) => {
     form.description = newNode.description || '';
     form.image = newNode.image || '';
     form.primary = newNode.primary || false;
-}, { immediate: true });
+}, {immediate: true});
 
 const close = () => {
     form.reset();
@@ -77,7 +80,7 @@ const close = () => {
 };
 
 const createNode = () => {
-    if(props.node.title === undefined) {
+    if (props.node.title === undefined) {
 
         form.post('/api/node', {
             preserveScroll: true,
