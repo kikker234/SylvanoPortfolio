@@ -24,7 +24,7 @@ function navigate() {
 
     <footer class="h-fit p-3 shadow-lg">
 
-        <div class="flex justify-start">
+        <div class="flex justify-end">
             <PrimaryButton @click="navigate">Admin</PrimaryButton>
         </div>
     </footer>
