@@ -27,6 +27,12 @@ Route::middleware(["auth", "verified"])->group(function() {
     Route::get('/node', function () {
         return Inertia::render('Node');
     })->name('node');
+
+    Route::prefix("/admin")->group(function() {
+        Route::get('/about-me', function () {
+            return Inertia::render('Admin/AboutMe');
+        })->name('about-me');
+    });
 });
 
 Route::middleware('auth')->group(function () {
