@@ -11,9 +11,9 @@ import Inbox from "@/Components/Inbox.vue";
 const showingNavigationDropdown = ref(false);
 
 const links = [
-    { href: route('dashboard'), active: route().current('dashboard'), text: 'Dashboard' },
-    { href: route('node'), active: route().current('node'), text: 'Node' },
-    // { href: route('/admin/about-me'), active: route().current('/admin/about-me'), text: 'About Me' },
+    // { href: route('dashboard'), active: route().current('dashboard'), text: 'Dashboard' },
+    // { href: route('/admin/nodes'), active: route().current('nodes'), text: 'Node' },
+    // { href: route('about-me'), active: route().current('about-me'), text: 'About Me' },
 ];
 
 </script>

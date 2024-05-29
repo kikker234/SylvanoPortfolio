@@ -11,7 +11,7 @@ let grid: string[][] = [];
 // Function to fetch nodes from the API
 async function fetchNodes() {
     try {
-        const response = await axios.get('/api/node');
+        const response = await axios.get('/admin/nodes');
         nodes.value = response.data as Node[];
     } catch (error) {
         console.error("Error fetching nodes:", error);

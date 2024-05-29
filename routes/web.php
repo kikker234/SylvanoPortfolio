@@ -15,24 +15,11 @@ Route::get('/', function () {
     ]);
 });
 
-Route::prefix('/api')->group(function() {
-    Route::resource('/node', NodeController::class);
-});
+Route::middleware(["auth", "verified"])->prefix("/admin")->group(function () {
+    Route::resource('/nodes', NodeController::class)->only(['index', 'store', 'update', 'destroy']);
 
-Route::middleware(["auth", "verified"])->group(function() {
-    Route::get('/dashboard', function () {
-        return Inertia::render('Dashboard');
-    })->name('dashboard');
-
-    Route::get('/node', function () {
-        return Inertia::render('Node');
-    })->name('node');
-
-    Route::prefix("/admin")->group(function() {
-        Route::get('/about-me', function () {
-            return Inertia::render('Admin/AboutMe');
-        })->name('about-me');
-    });
+    Route::inertia('/', "Dashboard")->name('dashboard');
+    Route::inertia('/about-me', "Admin/AboutMe")->name('about-me');
 });
 
 Route::middleware('auth')->group(function () {
@@ -40,4 +27,4 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

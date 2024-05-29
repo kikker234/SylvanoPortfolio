@@ -82,7 +82,7 @@ const close = () => {
 const createNode = () => {
     if (props.node.title === undefined) {
 
-        form.post('/api/node', {
+        form.post('/admin/nodes', {
             preserveScroll: true,
             onSuccess: () => {
                 close();
@@ -105,7 +105,7 @@ const createNode = () => {
         return;
     }
 
-    form.put(`/api/node/${props.node.id}`, {
+    form.put(`/admin/nodes/${props.node.id}`, {
         preserveScroll: true,
         onSuccess: () => {
             close();
