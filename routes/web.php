@@ -3,12 +3,14 @@
 use App\Http\Controllers\NodeController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Node;
+use App\Services\NodesServices;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', function () {
+    $nodes = new NodesServices();
     return Inertia::render("Landing", [
-        "nodes" =>Node::all()
+        "nodes" => $nodes->getAllNodes()
     ]);
 });
 
