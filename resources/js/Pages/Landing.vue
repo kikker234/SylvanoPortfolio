@@ -4,10 +4,10 @@ import PortfolioGrid from "@/Pages/Portfolio/PortfolioGrid.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 
 defineProps<{
-    canLogin?: boolean;
-    canRegister?: boolean;
-    laravelVersion: string;
-    phpVersion: string;
+    nodes: {
+        title: string;
+        image: string;
+    }[];
 }>();
 
 function navigate() {
@@ -19,7 +19,7 @@ function navigate() {
     <Head title="Welcome"/>
 
     <div class="flex justify-center items-center min-h-screen bg-slate-200">
-        <PortfolioGrid/>
+        <PortfolioGrid :nodes="nodes" />
     </div>
 
     <footer class="h-fit p-3 shadow-lg">

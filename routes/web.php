@@ -2,17 +2,24 @@
 
 use App\Http\Controllers\NodeController;
 use App\Http\Controllers\ProfileController;
+use App\Models\Node;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', function () {
-    return Inertia::render('Landing');
+    return Inertia::render("Landing", [
+        "nodes" =>Node::all()
+    ]);
 });
 
-Route::middleware(["auth", "verified"])->prefix("/admin")->group(function () {
-    Route::resource('/nodes', NodeController::class)->only(['index', 'store', 'update', 'destroy']);
+Route::get('/admin/nodes', [NodeController::class, 'index']);
 
-    Route::inertia('/', "Dashboard")->name('dashboard');
+Route::middleware(["auth", "verified"])->prefix("/admin")->group(function () {
+    Route::resource('/nodes', NodeController::class)->except(['index']);
+
+    Route::inertia('/', "Dashboard", [
+        "nodes" =>Node::all()
+    ])->name('dashboard');
     Route::inertia('/about-me', "Admin/AboutMe")->name('about-me');
 });
 
