@@ -22,7 +22,7 @@ defineProps<{
 
         <div class="flex justify-end">
             <PrimaryButton>
-                <Link href="/dashboard">Dashboard</Link>
+                <Link href="/admin">Dashboard</Link>
             </PrimaryButton>
         </div>
     </footer>
