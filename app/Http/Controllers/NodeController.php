@@ -4,18 +4,30 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\NodeRequest;
 use App\Models\Node;
+use App\Services\ImageService;
+use App\Services\NodesServices;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class NodeController extends Controller
 {
+
+    private readonly ImageService $imageServices;
+    private readonly NodesServices $nodesServices;
+
+    public function __construct(ImageService $imageServices, NodesServices $nodesServices)
+    {
+        $this->imageServices = $imageServices;
+        $this->nodesServices = $nodesServices;
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
         return Inertia::render("Node", [
-            "nodes" =>Node::all()
+            "nodes" => $this->nodesServices->getAllNodes()
         ]);
     }
 
@@ -24,7 +36,12 @@ class NodeController extends Controller
      */
     public function store(NodeRequest $request)
     {
-        $node = Node::create($request->validated());
+        $imagePath = $this->imageServices->upload($request->file('image'));
+        $node = Node::create([
+            'title' => $request->title,
+            'description' => $request->description,
+            'image' => $imagePath,
+        ]);
 
         if (!$node) {
             return redirect()->back()->with('error', 'Failed to create node');

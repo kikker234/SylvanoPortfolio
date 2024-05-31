@@ -24,7 +24,7 @@ class NodeRequest extends FormRequest
         return [
             'title' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string'],
-            'image' => ['required', 'max:1024'],
+            'image' => ['required', 'file'],
             'primary' => ['boolean'],
         ];
     }

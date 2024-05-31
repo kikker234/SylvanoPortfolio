@@ -19,7 +19,9 @@
 
             <div class="">
                 <InputLabel>Image</InputLabel>
-                <TextInput class="mt-1 block w-3/4" v-model="form.image"/>
+                <input type="file" class="mt-1 block w-3/4" v-on:change="(event) => {
+                    form.image = event.target.files[0];
+                }"/>
                 <InputError :message="form.errors.image" class="mt-2"/>
             </div>
 
