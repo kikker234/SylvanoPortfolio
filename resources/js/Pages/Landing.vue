@@ -9,10 +9,6 @@ defineProps<{
         image: string;
     }[];
 }>();
-
-function navigate() {
-    window.location.href = '/dashboard';
-}
 </script>
 
 <template>
@@ -25,7 +21,9 @@ function navigate() {
     <footer class="h-fit p-3 shadow-lg">
 
         <div class="flex justify-end">
-            <PrimaryButton @click="navigate">Admin</PrimaryButton>
+            <PrimaryButton>
+                <Link href="/dashboard">Dashboard</Link>
+            </PrimaryButton>
         </div>
     </footer>
 </template>
