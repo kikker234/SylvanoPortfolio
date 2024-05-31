@@ -6,12 +6,14 @@ import DropdownLink from '@/Components/DropdownLink.vue';
 import NavLink from '@/Components/NavLink.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 import {Link} from '@inertiajs/vue3';
+import Inbox from "@/Components/Inbox.vue";
 
 const showingNavigationDropdown = ref(false);
 
 const links = [
-    { href: route('dashboard'), active: route().current('dashboard'), text: 'Dashboard' },
-    { href: route('node'), active: route().current('node'), text: 'Node' }
+    // { href: route('dashboard'), active: route().current('dashboard'), text: 'Dashboard' },
+    // { href: route('/admin/nodes'), active: route().current('nodes'), text: 'Node' },
+    // { href: route('about-me'), active: route().current('about-me'), text: 'About Me' },
 ];
 
 </script>
@@ -47,6 +49,9 @@ const links = [
                         </div>
 
                         <div class="hidden sm:flex sm:items-center sm:ms-6">
+<!--                            Inbox -->
+                            <Inbox />
+
                             <!-- Settings Dropdown -->
                             <div class="ms-3 relative">
                                 <Dropdown align="right" width="48">

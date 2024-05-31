@@ -2,6 +2,14 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import {Head} from '@inertiajs/vue3';
 import PortfolioGrid from "@/Pages/Portfolio/PortfolioGrid.vue";
+
+const props = defineProps<{
+    nodes: {
+        title: string;
+        image: string;
+    }[];
+}>();
+
 </script>
 
 <template>
@@ -16,7 +24,7 @@ import PortfolioGrid from "@/Pages/Portfolio/PortfolioGrid.vue";
             <div class="max-w-7xl mx-auto sm:px-2 lg:px-6">
 
                 <div class="flex justify-center">
-                    <PortfolioGrid/>
+                    <PortfolioGrid :nodes="nodes" />
                 </div>
             </div>
         </div>

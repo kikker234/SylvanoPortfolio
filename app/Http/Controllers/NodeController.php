@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\NodeRequest;
 use App\Models\Node;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class NodeController extends Controller
 {
@@ -13,7 +14,9 @@ class NodeController extends Controller
      */
     public function index()
     {
-        return Node::all();
+        return Inertia::render("Node", [
+            "nodes" =>Node::all()
+        ]);
     }
 
     /**
@@ -23,9 +26,11 @@ class NodeController extends Controller
     {
         $node = Node::create($request->validated());
 
-        return inertia('Node', [
-            'node' => $node,
-        ]);
+        if (!$node) {
+            return redirect()->back()->with('error', 'Failed to create node');
+        }
+
+        return $this->index();
     }
 
     /**
@@ -33,11 +38,13 @@ class NodeController extends Controller
      */
     public function update(NodeRequest $request, Node $node)
     {
-        $node->update($request->validated());
+        $node = $node->update($request->validated());
 
-        return inertia('Node', [
-            'node' => $node,
-        ]);
+        if (!$node) {
+            return redirect()->back()->with('error', 'Failed to update node');
+        }
+
+        return $this->index();
     }
 
     /**
@@ -46,5 +53,7 @@ class NodeController extends Controller
     public function destroy(Node $node)
     {
         Node::destroy($node->id);
+
+        return $this->index();
     }
 }
