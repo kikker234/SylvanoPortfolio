@@ -21,7 +21,7 @@ jobs:
       - name: Deploy to VPS
         run: |
           ssh -o StrictHostKeyChecking=no root@85.215.185.110 << 'EOF'
-            cd /sylvano-portfolio/SylvanoPortfolio
+            cd /sylvano-portfolio/Production
             git pull origin main
 
             php artisan migrate
