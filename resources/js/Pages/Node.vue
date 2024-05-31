@@ -11,12 +11,11 @@ import EditNode from "@/Modal/Nodes/EditNode.vue";
 
 const nodes = ref([]);
 
-const fetchNodes = async () => {
-    const response = await axios.get('/api/node');
-    nodes.value = response.data;
-};
+const props = defineProps({
+    nodes: Array,
+});
 
-fetchNodes();
+nodes.value = props.nodes;
 
 const createModalVisible = ref(false);
 const editModalVisible = ref(false);
@@ -40,13 +39,9 @@ const closeEditModal = () => {
     editModalVisible.value = false;
 };
 
-const onNodeCreated = () => {
-    fetchNodes();
-};
-
 const deleteNode = (id: number) => {
-    axios.delete(`/api/node/${id}`).then(() => {
-        fetchNodes();
+    axios.delete(`/admin/nodes/${id}`).then(() => {
+        nodes.value = nodes.value.filter((node) => node.id !== id);
     });
 };
 
@@ -93,14 +88,14 @@ const deleteNode = (id: number) => {
         <EditNode
             :show="createModalVisible"
             @close="closeCreateModal"
-            @created="onNodeCreated"
+            @created="() => {}"
             :node="{}"
         />
 
         <EditNode
             :show="editModalVisible"
             @close="closeEditModal"
-            @created="onNodeCreated"
+            @created="() => {}"
             :node="currentNode"
             v-if="currentNode != null"
         />

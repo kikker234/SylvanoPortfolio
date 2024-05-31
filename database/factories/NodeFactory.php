@@ -16,10 +16,15 @@ class NodeFactory extends Factory
      */
     public function definition(): array
     {
+
+        $randomWidth = random_int(200, 800);
+        $randomHeight = random_int(200, 800);
+        $placeHolderImage = "https://via.placeholder.com/{$randomWidth}x{$randomHeight}";
+
         return [
             'title' => $this->faker->sentence,
             'description' => $this->faker->paragraph,
-            'image' => $this->faker->imageUrl,
+            'image' => $placeHolderImage,
         ];
     }
 }
