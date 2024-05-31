@@ -67,7 +67,7 @@ const form = useForm({
     primary: false,
 });
 
-function handleFileChange(event) {
+const handleFileChange = (event) => {
     if (event.target.files && event.target.files.length > 0) {
         this.form.image = event.target.files[0];
     } else {
