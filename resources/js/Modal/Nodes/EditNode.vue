@@ -60,6 +60,13 @@ const props = defineProps({
     },
 });
 
+const form = useForm({
+    title: '',
+    description: '',
+    image: '',
+    primary: false,
+});
+
 function handleFileChange(event) {
     if (event.target.files && event.target.files.length > 0) {
         this.form.image = event.target.files[0];
@@ -67,13 +74,6 @@ function handleFileChange(event) {
         console.error("Geen bestand geselecteerd.");
     }
 }
-
-const form = useForm({
-    title: '',
-    description: '',
-    image: '',
-    primary: false,
-});
 
 watch(() => props.node, (newNode) => {
     form.title = newNode.title || '';
