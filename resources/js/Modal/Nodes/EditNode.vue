@@ -19,9 +19,7 @@
 
             <div class="">
                 <InputLabel>Image</InputLabel>
-                <input type="file" class="mt-1 block w-3/4" v-on:change="(event) => {
-                    form.image = event.target.files[0];
-                }"/>
+                <input type="file" class="mt-1 block w-3/4" v-on:change="handleFileChange"/>
                 <InputError :message="form.errors.image" class="mt-2"/>
             </div>
 
@@ -61,6 +59,14 @@ const props = defineProps({
         default: () => ({}),
     },
 });
+
+function handleFileChange(event) {
+    if (event.target.files && event.target.files.length > 0) {
+        this.form.image = event.target.files[0];
+    } else {
+        console.error("Geen bestand geselecteerd.");
+    }
+}
 
 const form = useForm({
     title: '',
