@@ -18,7 +18,7 @@ const props = defineProps<{
                 :key="node.title">
                 <img
                     :src="node.image"
-                    alt="node.title"
+                    :alt="node.title"
                     class="w-full h-full object-cover rounded-lg">
                 <div
                     class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 hover:opacity-100 rounded-lg transition-opacity duration-300">
