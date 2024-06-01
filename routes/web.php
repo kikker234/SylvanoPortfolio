@@ -14,15 +14,14 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/admin/nodes', [NodeController::class, 'index']);
+Route::get('/admin/nodes', [NodeController::class, 'index'])->name("nodes");
 
 Route::middleware(["auth", "verified"])->prefix("/admin")->group(function () {
     Route::resource('/nodes', NodeController::class)->except(['index']);
 
     Route::inertia('/', "Dashboard", [
-        "nodes" =>Node::all()
+        "nodes" => (new NodesServices())->getAllNodes()
     ])->name('dashboard');
-    Route::inertia('/about-me', "Admin/AboutMe")->name('about-me');
 });
 
 Route::middleware('auth')->group(function () {

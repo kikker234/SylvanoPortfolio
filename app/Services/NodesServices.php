@@ -16,7 +16,6 @@ class NodesServices
             // image is stored as: images/h6hP3DyylqdyAz2Ed0abafBaqUEDEh37V5VRQ5uy.jpg
             // needs to be accessible by Vue frontend
             $node->image = Storage::url($node->image);
-            error_log($node->image);
         }
 
         return $nodes;
