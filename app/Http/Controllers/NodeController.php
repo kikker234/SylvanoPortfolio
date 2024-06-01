@@ -63,11 +63,10 @@ class NodeController extends Controller
             $node->image = $imagePath;
         }
 
-        $node = $node->update([
-            'title' => $request->title,
-            'description' => $request->description,
-            'image' => $node->image,
-        ]);
+        $node->title = $request->title ?? $node->title;
+        $node->description = $request->description ?? $node->description;
+
+        $node->save();
 
         if (!$node) {
             return redirect()->back()->with('error', 'Failed to update node');
@@ -82,6 +81,8 @@ class NodeController extends Controller
 
     public function destroy(Node $node)
     {
+        $this->imageServices->delete($node->image);
+
         Node::destroy($node->id);
 
         return $this->index();
