@@ -1,52 +1,53 @@
 <script setup lang="ts">
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import { Head } from "@inertiajs/vue3";
-import { ref } from "vue";
+import {Head} from "@inertiajs/vue3";
+import {ref} from "vue";
 import axios from "axios";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import DangerButton from "@/Components/DangerButton.vue";
+import CreateNodeModal from "../Modal/Nodes/EditNode.vue";
 import EditNode from "@/Modal/Nodes/EditNode.vue";
 
+const nodes = ref([]);
+
 const props = defineProps({
-    nodes: {
-        type: Array,
-        required: true,
-    },
+nodes: Array,
 });
 
-const nodes = ref([...props.nodes]);
+nodes.value = props.nodes;
 
 const createModalVisible = ref(false);
 const editModalVisible = ref(false);
 const currentNode = ref(null);
 
 const openCreateModal = () => {
-    currentNode.value = null;
-    createModalVisible.value = true;
+currentNode.value = null;
+createModalVisible.value = true;
 };
 
 const openEditModal = (node) => {
-    currentNode.value = node;
-    editModalVisible.value = true;
+currentNode.value = node;
+editModalVisible.value = true;
 };
 
 const closeCreateModal = () => {
-    createModalVisible.value = false;
+createModalVisible.value = false;
 };
 
 const closeEditModal = () => {
-    editModalVisible.value = false;
+editModalVisible.value = false;
 };
 
 const deleteNode = (id: number) => {
-    axios.delete(`/admin/nodes/${id}`).then(() => {
-        nodes.value = nodes.value.filter((node) => node.id !== id);
-    });
+axios.delete(`/admin/nodes/${id}`).then(() => {
+nodes.value = nodes.value.filter((node) => node.id !== id);
+});
 };
+
 </script>
 
 <template>
-    <Head title="Node" />
+    <Head title="Node"/>
 
     <AuthenticatedLayout>
         <template #header>
@@ -65,7 +66,7 @@ const deleteNode = (id: number) => {
                     <div class="flex flex-col gap-5">
                         <div class="flex gap-5" v-for="node in nodes" :key="node.id">
                             <div class="w-1/4 h-1/4 object-cover overflow-hidden">
-                                <img :src="node.image" :alt="node.title" />
+                                <img :src="node.image" :alt="node.title"/>
                             </div>
                             <div class="w-full flex items-center justify-start">
                                 <div>
@@ -101,4 +102,5 @@ const deleteNode = (id: number) => {
 </template>
 
 <style scoped>
+
 </style>
