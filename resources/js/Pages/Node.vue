@@ -47,7 +47,7 @@ const reloadNodes = () => {
     router.visit('/admin/nodes', {
         preserveScroll: true,
         onSuccess: (page) => {
-            nodes.value = page.props.nodes;
+            nodes.value = props.nodes || [];
         },
     });
 }
