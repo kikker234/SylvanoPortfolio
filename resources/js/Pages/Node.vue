@@ -43,10 +43,11 @@ const deleteNode = (id: number) => {
 };
 
 const reloadNodes = () => {
-    router.get('/admin/nodes', {
+    // do not use axios.get('/admin/nodes') because it will not trigger the inertia reload
+    router.visit('/admin/nodes', {
         preserveScroll: true,
-        onSuccess: (data) => {
-            nodes.value = data.nodes;
+        onSuccess: (page) => {
+            nodes.value = page.props.nodes;
         },
     });
 }
