@@ -15,7 +15,7 @@ const props = defineProps<{
 <template>
 
     <Modal :show="show">
-        <Page :page="props.page"/>
+        <Page v-if="props.page !== undefined" :page="props.page"/>
 
         <div class="flex justify-end m-4">
             <PrimaryButton @click="onClose">Close</PrimaryButton>

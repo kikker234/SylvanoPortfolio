@@ -12,17 +12,15 @@ const props = defineProps<{
     pages: any
 }>();
 
-const show = ref(false);
 
-const previewPage = ref({});
+const previewPage = ref(undefined);
 
 const showPreview = (page: Page) => {
     previewPage.value = page;
-    show.value = true;
 }
 
 const closePreview = () => {
-    show.value = false;
+    previewPage.value = undefined;
 }
 
 </script>
@@ -58,6 +56,6 @@ const closePreview = () => {
             </div>
         </div>
 
-        <PreviewPage :onClose="closePreview" :show="show" :page="previewPage"></PreviewPage>
+        <PreviewPage :onClose="closePreview" :show="previewPage !== undefined" :page="previewPage"></PreviewPage>
     </AuthenticatedLayout>
 </template>
