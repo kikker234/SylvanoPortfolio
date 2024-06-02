@@ -34,6 +34,24 @@ class HandleInertiaRequests extends Middleware
             'auth' => [
                 'user' => $request->user(),
             ],
+            'avatar' => $this->getAvatar(),
+            'background' => $this->getBackground(),
         ];
+    }
+
+    private function getAvatar() {
+        if (file_exists(public_path('storage/avatar/avatar.png'))) {
+            return asset('storage/avatar/avatar.png');
+        }
+
+        return 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541';
+    }
+
+    private function getBackground() {
+        if (file_exists(public_path('storage/background/background.png'))) {
+            return asset('storage/background/background.png');
+        }
+
+        return 'https://placehold.co/600x400';
     }
 }

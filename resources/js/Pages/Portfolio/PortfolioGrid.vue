@@ -10,7 +10,7 @@ const props = defineProps<{
 </script>
 
 <template>
-    <div class="bg-white w-4/5 rounded-lg p-3">
+    <div class="bg-opacity-50 bg-slate-200 backdrop-blur-sm w-4/5 rounded-lg p-3">
         <div class="columns-1 gap-5 sm:columns-2 sm:gap-8 md:columns-3 lg:columns-4 [&>img:not(:first-child)]:mt-8">
             <div
                 class="relative mb-3"

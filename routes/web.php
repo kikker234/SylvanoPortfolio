@@ -1,11 +1,13 @@
 <?php
 
+use App\Http\Controllers\LookAndFeelController;
 use App\Http\Controllers\NodeController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Node;
 use App\Services\NodesServices;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+
 
 Route::get('/', function () {
     $nodes = new NodesServices();
@@ -18,6 +20,10 @@ Route::get('/admin/nodes', [NodeController::class, 'index'])->name("nodes");
 
 Route::middleware(["auth", "verified"])->prefix("/admin")->group(function () {
     Route::resource('/nodes', NodeController::class)->except(['index']);
+
+    Route::get('/look-and-feel', [LookAndFeelController::class, 'index'])->name('look-and-feel');
+    Route::post('/look-and-feel/avatar', [LookAndFeelController::class, 'uploadAvatar'])->name('look-and-feel.avatar');
+    Route::post('/look-and-feel/background', [LookAndFeelController::class, 'uploadBackground'])->name('look-and-feel.background');
 
     Route::inertia('/', "Dashboard", [
         "nodes" => (new NodesServices())->getAllNodes()
