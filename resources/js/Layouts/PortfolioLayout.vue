@@ -24,7 +24,7 @@ watch(background, (newVal) => {
                 <ApplicationLogo class="w-24"/>
 
                 <div class="">
-                    <Link>Portfolio</Link>
+                    <Link href="/">Portfolio</Link>
                 </div>
             </div>
         </nav>
