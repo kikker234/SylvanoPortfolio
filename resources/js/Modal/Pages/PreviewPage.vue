@@ -18,7 +18,7 @@ const props = defineProps<{
         <Page v-if="props.page !== undefined" :page="props.page"/>
 
         <div class="flex justify-end m-4">
-            <PrimaryButton @click="onClose">Close</PrimaryButton>
+            <PrimaryButton :click="onClose">Close</PrimaryButton>
         </div>
     </Modal>
 
