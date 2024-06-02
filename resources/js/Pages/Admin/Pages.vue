@@ -1,17 +1,29 @@
 <script setup lang="ts">
 
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import {Head} from "@inertiajs/vue3";
+import {Head, Link} from "@inertiajs/vue3";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import InputCheckbox from "@/Components/InputCheckbox.vue";
 import PreviewPage from "@/Modal/Pages/PreviewPage.vue";
 import {ref} from "vue";
+import Page from "@/types/Page";
 
 const props = defineProps<{
     pages: any
 }>();
 
 const show = ref(false);
+
+const previewPage = ref({});
+
+const showPreview = (page: Page) => {
+    previewPage.value = page;
+    show.value = true;
+}
+
+const closePreview = () => {
+    show.value = false;
+}
 
 </script>
 
@@ -22,6 +34,10 @@ const show = ref(false);
         <template #header>
             <div class="flex justify-between items-center">
                 <h2 class="font-semibold text-xl text-gray-800 leading-tight">Pages</h2>
+
+                <Link :href="route('pages.create')">
+                    <PrimaryButton>Create Page</PrimaryButton>
+                </Link>
             </div>
         </template>
 
@@ -33,15 +49,15 @@ const show = ref(false);
                 </div>
 
                 <div class="flex gap-3">
-                    <PrimaryButton @click="() => show = true">Preview</PrimaryButton>
-                    <PrimaryButton>Edit</PrimaryButton>
+                    <PrimaryButton @click="() => showPreview(page)">Preview</PrimaryButton>
+
+                    <Link :href="route('pages.edit', page.id)">
+                        <PrimaryButton>Edit</PrimaryButton>
+                    </Link>
                 </div>
             </div>
         </div>
 
-        <PreviewPage :onClose="() => {
-            console.log('Close');
-            show = false;
-        }" :show="show" :page="pages[0]"></PreviewPage>
+        <PreviewPage :onClose="closePreview" :show="show" :page="previewPage"></PreviewPage>
     </AuthenticatedLayout>
 </template>

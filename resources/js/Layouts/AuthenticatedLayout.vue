@@ -13,7 +13,7 @@ const showingNavigationDropdown = ref(false);
 const links = [
     { href: route('dashboard'), active: route().current('dashboard'), text: 'Dashboard' },
     { href: route('nodes'), active: route().current('nodes'), text: 'Node' },
-    { href: route('pages'), active: route().current('pages'), text: 'Pages' },
+    { href: route('pages.index'), active: route().current('pages.index'), text: 'Pages' },
     { href: route('look-and-feel'), active: route().current('look-and-feel'), text: 'Look & Feel' },
 ];
 

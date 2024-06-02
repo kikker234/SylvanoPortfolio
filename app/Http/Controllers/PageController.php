@@ -24,7 +24,7 @@ class PageController extends Controller
      */
     public function create()
     {
-
+        return Inertia::render('Admin/PageEditor');
     }
 
     /**
@@ -32,7 +32,9 @@ class PageController extends Controller
      */
     public function store(StorePageRequest $request)
     {
-        //
+        Page::insert($request->validated());
+
+        return back();
     }
 
     /**
@@ -48,7 +50,9 @@ class PageController extends Controller
      */
     public function edit(Page $page)
     {
-        //
+        return Inertia::render('Admin/PageEditor')->with([
+            'page' => $page,
+        ]);
     }
 
     /**
@@ -56,7 +60,9 @@ class PageController extends Controller
      */
     public function update(UpdatePageRequest $request, Page $page)
     {
-        //
+        $page->update($request->validated());
+
+        return back();
     }
 
     /**
@@ -64,6 +70,8 @@ class PageController extends Controller
      */
     public function destroy(Page $page)
     {
-        //
+        $page->delete();
+
+        return back();
     }
 }

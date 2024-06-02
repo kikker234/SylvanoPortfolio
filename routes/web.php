@@ -21,7 +21,7 @@ Route::get('/admin/nodes', [NodeController::class, 'index'])->name("nodes");
 
 Route::middleware(["auth", "verified"])->prefix("/admin")->group(function () {
     Route::resource('/nodes', NodeController::class)->except(['index']);
-    Route::resource('/pages', PageController::class)->name('index', 'pages');
+    Route::resource('/pages', PageController::class);
 
     Route::get('/look-and-feel', [LookAndFeelController::class, 'index'])->name('look-and-feel');
     Route::post('/look-and-feel/avatar', [LookAndFeelController::class, 'uploadAvatar'])->name('look-and-feel.avatar');
