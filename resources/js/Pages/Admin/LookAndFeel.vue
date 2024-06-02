@@ -86,7 +86,7 @@ const handleFileChange = (form, event) => {
                         <InputError :message="backgroundForm.errors.image"/>
                     </div>
 
-                    <img :src="background" class="w-1/6" alt="Background image"/>
+                    <img :src="background + ''" class="w-1/6" alt="Background image"/>
                 </div>
 
                 <div class="flex justify-around items-center">
