@@ -7,6 +7,9 @@ import {Head, Link, useForm} from "@inertiajs/vue3";
 import DangerButton from "@/Components/DangerButton.vue";
 import TextEditor from "@/Components/TextEditor.vue";
 import TextInput from "@/Components/TextInput.vue";
+import {ref, watch} from "vue";
+import InputLabel from "@/Components/InputLabel.vue";
+import InputDescription from "@/Components/InputDescription.vue";
 
 const props = defineProps<{
     page: {
@@ -17,12 +20,12 @@ const props = defineProps<{
 }>();
 
 const form = useForm({
-    title: props.page.title,
-    content: props.page.content,
+    title: props.page ? props.page.title : '',
+    content: props.page ? props.page.content : '',
 });
 
 const submitForm = () => {
-    if(props.page !== undefined) {
+    if (props.page !== undefined) {
         updatePage();
     } else {
         createPage();
@@ -37,29 +40,54 @@ const updatePage = () => {
     form.put(route('pages.update', props.page.id));
 }
 
+const getTitle = () => {
+    return props.page ? 'Edit page' : 'Create page';
+}
+
+watch(form, () => {
+    changes.value = true;
+}, {deep: true});
+
+const changes = ref(false);
+
 </script>
 
 <template>
-    <Head title="Page editor"/>
+    <Head :title="getTitle()"/>
 
     <AuthenticatedLayout>
         <template #header>
             <div class="flex justify-between items-center">
-                <h2 class="font-semibold text-xl text-gray-800 leading-tight">Page editor</h2>
+                <h2 class="font-semibold text-xl text-gray-800 leading-tight">{{ getTitle() }}</h2>
 
                 <Link :href="route('pages.index')" class="flex flex-col">
-                    <DangerButton>Back</DangerButton>
+                    <DangerButton v-if="changes">Back</DangerButton>
+                    <PrimaryButton v-if="!changes">Back</PrimaryButton>
                 </Link>
             </div>
         </template>
 
-        <div class="">
-            <form action="">
-                <TextInput v-model="form.title" />
-                <TextEditor v-model="form.content"></TextEditor>
+        <div class="py-12">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
 
-                <PrimaryButton @click="submitForm">Submit</PrimaryButton>
-            </form>
+                    <form action="">
+                        <div class="py-4">
+                            <InputLabel>Title</InputLabel>
+                            <TextInput class="w-full" v-model="form.title"/>
+                            <InputDescription>This is the name shown in the navigation</InputDescription>
+                        </div>
+
+                        <div class="py-4">
+                            <TextEditor v-model="form.content"></TextEditor>
+                        </div>
+
+                        <div class="flex justify-end">
+                            <PrimaryButton @click="submitForm">Submit</PrimaryButton>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </AuthenticatedLayout>
 </template>

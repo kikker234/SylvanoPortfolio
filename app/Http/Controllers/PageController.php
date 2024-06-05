@@ -42,7 +42,9 @@ class PageController extends Controller
      */
     public function show(Page $page)
     {
-        //
+        return Inertia::render("CustomPage")->with([
+            'page' => $page,
+        ]);
     }
 
     /**

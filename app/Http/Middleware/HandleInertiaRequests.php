@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Page;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 
@@ -36,6 +37,7 @@ class HandleInertiaRequests extends Middleware
             ],
             'avatar' => $this->getAvatar(),
             'background' => $this->getBackground(),
+            'pages' => $this->getPages(),
         ];
     }
 
@@ -53,5 +55,10 @@ class HandleInertiaRequests extends Middleware
         }
 
         return 'https://placehold.co/600x400';
+    }
+
+    private function getPages()
+    {
+        return Page::all()->map->only('id', 'title');
     }
 }

@@ -21,6 +21,7 @@ const showPreview = (page: Page) => {
 
 const closePreview = () => {
     previewPage.value = undefined;
+    console.log(previewPage.value)
 }
 
 </script>
@@ -56,6 +57,6 @@ const closePreview = () => {
             </div>
         </div>
 
-        <PreviewPage :onClose="closePreview" :show="previewPage !== undefined" :page="previewPage"></PreviewPage>
+        <PreviewPage :onClose="closePreview"  :page="previewPage"></PreviewPage>
     </AuthenticatedLayout>
 </template>

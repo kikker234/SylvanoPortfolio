@@ -6,19 +6,22 @@ import Page from "@/Components/Page.vue";
 
 const props = defineProps<{
     page: any
-    show: boolean
     onClose: Function
 }>();
+
+const closePreviewModal = () => {
+    props.onClose();
+}
 
 </script>
 
 <template>
 
-    <Modal :show="show">
+    <Modal :show="props.page !== undefined">
         <Page v-if="props.page !== undefined" :page="props.page"/>
 
         <div class="flex justify-end m-4">
-            <PrimaryButton :click="onClose">Close</PrimaryButton>
+            <PrimaryButton @click="closePreviewModal">Close</PrimaryButton>
         </div>
     </Modal>
 
