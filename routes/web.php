@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\LookAndFeelController;
 use App\Http\Controllers\NodeController;
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Node;
 use App\Services\NodesServices;
@@ -20,6 +21,7 @@ Route::get('/admin/nodes', [NodeController::class, 'index'])->name("nodes");
 
 Route::middleware(["auth", "verified"])->prefix("/admin")->group(function () {
     Route::resource('/nodes', NodeController::class)->except(['index']);
+    Route::resource('/pages', PageController::class);
 
     Route::get('/look-and-feel', [LookAndFeelController::class, 'index'])->name('look-and-feel');
     Route::post('/look-and-feel/avatar', [LookAndFeelController::class, 'uploadAvatar'])->name('look-and-feel.avatar');
@@ -34,5 +36,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
 });
+
+Route::get('/{page:id}', [PageController::class, 'show'])->name('page.show');
 
 require __DIR__ . '/auth.php';
