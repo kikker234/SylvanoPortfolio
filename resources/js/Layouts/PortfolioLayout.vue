@@ -5,6 +5,7 @@ import {computed, ref, watch} from "vue";
 import ApplicationLogo from "@/Components/ApplicationLogo.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import GlassCard from "@/Components/GlassCard.vue";
+import Page from "@/types/Page";
 
 const page = usePage();
 const background = computed(() => page.props.background);
@@ -15,7 +16,7 @@ watch(background, (newVal) => {
     document.documentElement.style.setProperty('--bg-url', cssBackground.value);
 }, {immediate: true});
 
-const customPages = page.props.pages;
+const customPages: Page[] = page.props.pages as Page[];
 
 </script>
 
@@ -33,7 +34,7 @@ const customPages = page.props.pages;
                             <Link href="/">Portfolio</Link>
                         </PrimaryButton>
 
-                        <Link class="mx-2" v-for="page in customPages" :key="page" :href="route('page.show', page.id)">
+                        <Link class="mx-2" v-for="page in customPages" :key="page.id" :href="route('page.show', page.id)">
                             <PrimaryButton>
                                 {{ page.title }}
                             </PrimaryButton>
