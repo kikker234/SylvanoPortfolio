@@ -11,17 +11,17 @@ use Inertia\Inertia;
 
 
 Route::get('/', function () {
-    if (Schema::hasTable('nodes')) {
-        $nodes = new NodesServices();
-        return Inertia::render("Landing", [
-            "nodes" => $nodes->getAllNodes()
-        ]);
-    } else {
-        // Tabel bestaat nog niet, je kunt een fallback response geven
-        return Inertia::render("Landing", [
-            "nodes" => []
-        ]);
-    }
+//    if (Schema::hasTable('nodes')) {
+//        $nodes = new NodesServices();
+//        return Inertia::render("Landing", [
+//            "nodes" => $nodes->getAllNodes()
+//        ]);
+//    } else {
+//        // Tabel bestaat nog niet, je kunt een fallback response geven
+//        return Inertia::render("Landing", [
+//            "nodes" => []
+//        ]);
+//    }
 });
 
 Route::get('/admin/nodes', [NodeController::class, 'index'])->name("nodes");
