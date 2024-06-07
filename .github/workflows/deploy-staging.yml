@@ -21,7 +21,7 @@ jobs:
       - name: Deploy to VPS
         run: |
           ssh -o StrictHostKeyChecking=no root@85.215.185.110 << 'EOF'
-            cd /sylvano-portfolio/Staging
+            cd /SylvanoPortfolio/Staging
             git restore .
             git pull origin dev
 
