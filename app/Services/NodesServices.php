@@ -19,6 +19,6 @@ class NodesServices
 //        }
 //
 //        return $nodes;
-        return [];
+        return new Collection();
     }
 }
