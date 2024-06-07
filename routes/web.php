@@ -37,6 +37,6 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
 });
 
-Route::get('/{page:id}', [PageController::class, 'show'])->name('page.show');
+//Route::get('/{page:id}', [PageController::class, 'show'])->name('page.show');
 
 require __DIR__ . '/auth.php';
