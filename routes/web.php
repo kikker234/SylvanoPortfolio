@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LookAndFeelController;
 use App\Http\Controllers\NodeController;
 use App\Http\Controllers\PageController;
@@ -10,19 +11,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 
-Route::get('/', function () {
-//    if (Schema::hasTable('nodes')) {
-//        $nodes = new NodesServices();
-//        return Inertia::render("Landing", [
-//            "nodes" => $nodes->getAllNodes()
-//        ]);
-//    } else {
-//        // Tabel bestaat nog niet, je kunt een fallback response geven
-//        return Inertia::render("Landing", [
-//            "nodes" => []
-//        ]);
-//    }
-});
+Route::get('/', [\App\Http\Controllers\LandingController::class, 'index'])->name('landing');
 
 Route::get('/admin/nodes', [NodeController::class, 'index'])->name("nodes");
 
@@ -34,9 +23,7 @@ Route::middleware(["auth", "verified"])->prefix("/admin")->group(function () {
     Route::post('/look-and-feel/avatar', [LookAndFeelController::class, 'uploadAvatar'])->name('look-and-feel.avatar');
     Route::post('/look-and-feel/background', [LookAndFeelController::class, 'uploadBackground'])->name('look-and-feel.background');
 
-    Route::inertia('/', "Dashboard", [
-        //"nodes" => (new NodesServices())->getAllNodes()
-    ])->name('dashboard');
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 });
 
 Route::middleware('auth')->group(function () {
