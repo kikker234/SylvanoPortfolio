@@ -35,7 +35,7 @@ Route::middleware(["auth", "verified"])->prefix("/admin")->group(function () {
     Route::post('/look-and-feel/background', [LookAndFeelController::class, 'uploadBackground'])->name('look-and-feel.background');
 
     Route::inertia('/', "Dashboard", [
-        "nodes" => (new NodesServices())->getAllNodes()
+        //"nodes" => (new NodesServices())->getAllNodes()
     ])->name('dashboard');
 });
 
