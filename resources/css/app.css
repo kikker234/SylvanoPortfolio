@@ -17,3 +17,15 @@ h3 {
 h4 {
     @apply text-base font-bold;
 }
+
+ul {
+    @apply list-disc list-inside;
+}
+
+ol {
+    @apply list-decimal list-inside;
+}
+
+hr {
+    @apply h-px my-8 bg-black border-0 dark:bg-black;
+}

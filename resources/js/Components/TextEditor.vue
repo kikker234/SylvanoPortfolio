@@ -1,7 +1,5 @@
 <template>
-    <div
-        style="border: 1px solid gray"
-    >
+    <div class="border border-gray-600">
         <Toolbar
             :editor="editorRef"
             :defaultConfig="toolbarConfig"
@@ -12,7 +10,8 @@
             :defaultConfig="editorConfig"
             v-model="defaultHtml"
             @on-change="handleChange"
-            style="height: 300px; overflow-y: hidden; border-radius: 20px"
+            class="rounded-lg overflow-y-hidden"
+            style="height: 70vh"
             :mode="mode"
             @on-created="handleCreated"
         />
@@ -70,6 +69,9 @@ onBeforeUnmount(() => {
     if (editor == null) return;
     editor.destroy();
 });
+import { i18nChangeLanguage } from '@wangeditor/editor'
+
+i18nChangeLanguage('en')
 </script>
 
 <style src="@wangeditor/editor/dist/css/style.css"></style>
