@@ -33,5 +33,5 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__ . '/auth.php';
 
-Route::get('/{page:id}', [PageController::class, 'show'])->name('page.show');
+Route::get('/{page:title}', [PageController::class, 'show'])->name('page.show');
 

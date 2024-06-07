@@ -34,7 +34,7 @@ const customPages: Page[] = page.props.pages as Page[];
                             <Link href="/">Portfolio</Link>
                         </PrimaryButton>
 
-                        <Link class="mx-2" v-for="page in customPages" :key="page.id" :href="route('page.show', page.id)">
+                        <Link class="mx-2" v-for="page in customPages" :key="page.id" :href="route('page.show', page.title)">
                             <PrimaryButton>
                                 {{ page.title }}
                             </PrimaryButton>
