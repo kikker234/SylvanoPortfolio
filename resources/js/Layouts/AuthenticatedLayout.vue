@@ -11,10 +11,10 @@ import Inbox from "@/Components/Inbox.vue";
 const showingNavigationDropdown = ref(false);
 
 const links = [
-    { href: route('dashboard'), active: route().current('dashboard'), text: 'Dashboard' },
-    { href: route('nodes'), active: route().current('nodes'), text: 'Node' },
-    { href: route('pages.index'), active: route().current('pages.index'), text: 'Pages' },
-    { href: route('look-and-feel'), active: route().current('look-and-feel'), text: 'Look & Feel' },
+    {href: route('dashboard'), active: route().current('dashboard'), text: 'Dashboard'},
+    {href: route('nodes'), active: route().current('nodes'), text: 'Node'},
+    {href: route('pages.index'), active: route().current('pages.index'), text: 'Pages'},
+    {href: route('look-and-feel'), active: route().current('look-and-feel'), text: 'Look & Feel'},
 ];
 
 </script>
@@ -38,9 +38,9 @@ const links = [
 
                             <!-- Navigation Links -->
                             <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-<!--                                <NavLink :href="route('dashboard')" :active="route().current('dashboard')">-->
-<!--                                    Dashboard-->
-<!--                                </NavLink>-->
+                                <!--                                <NavLink :href="route('dashboard')" :active="route().current('dashboard')">-->
+                                <!--                                    Dashboard-->
+                                <!--                                </NavLink>-->
                                 <template v-for="link in links">
                                     <NavLink :href="link.href" :active="link.active">
                                         {{ link.text }}
@@ -50,8 +50,11 @@ const links = [
                         </div>
 
                         <div class="hidden sm:flex sm:items-center sm:ms-6">
-<!--                            Inbox -->
-                            <Inbox />
+                            <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                                <Link class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 focus:outline-none focus:border-gray-300 transition duration-150 ease-in-out" href="/" :active="false">
+                                    Home
+                                </Link>
+                            </div>
 
                             <!-- Settings Dropdown -->
                             <div class="ms-3 relative">
