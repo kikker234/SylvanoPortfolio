@@ -12,6 +12,7 @@ const props = defineProps<{
     isOpen: boolean,
     name: string,
     url: string,
+    onClose: () => void
 }>();
 
 const form = useForm({
@@ -27,13 +28,13 @@ const prepareIcon = () => {
 const save = () => {
     console.log('save')
 
-    form.post('/social-media', {
+    form.post('/admin/social-media', {
         preserveScroll: true,
         onSuccess: () => {
             console.log('success')
         },
-        onError: () => {
-            console.log('error')
+        onError: (e) => {
+            console.log(e)
         }
     });
 }
@@ -42,23 +43,23 @@ const save = () => {
 
 <template>
     <Modal :show="isOpen">
-        <input type="hidden" name="_token" :value="csrfToken">
+        <div class="p-3">
+            <div class="">
+                <InputLabel>Name</InputLabel>
+                <TextInput placeholder="Name" v-model="form.name" name="name" type="text" class="w-full"/>
+                <InputError :message="form.errors.name" class="mt-1"/>
+            </div>
 
-        <div class="">
-            <InputLabel>Name</InputLabel>
-            <TextInput placeholder="Name" :model-value="form.name" name="name" type="text" class="w-full"/>
-            <InputError :message="form.errors.name" class="mt-1"/>
-        </div>
+            <div class="mt-3">
+                <InputLabel>URL</InputLabel>
+                <TextInput placeholder="URL" v-model="form.url" name="url" type="text" class="w-full"/>
+                <InputError :message="form.errors.url" class="mt-1"/>
+            </div>
 
-        <div class="mt-3">
-            <InputLabel>URL</InputLabel>
-            <TextInput placeholder="URL" :model-value="form.url" name="url" type="text" class="w-full"/>
-            <InputError :message="form.errors.url" class="mt-1"/>
-        </div>
-
-        <div class="flex justify-end">
-            <DangerButton>Cancel</DangerButton>
-            <PrimaryButton :onClick="save">Save</PrimaryButton>
+            <div class="flex justify-end mt-2 gap-3">
+                <DangerButton :onClick="props.onClose">Cancel</DangerButton>
+                <PrimaryButton :onClick="save">Save</PrimaryButton>
+            </div>
         </div>
     </Modal>
 </template>

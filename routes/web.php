@@ -6,10 +6,7 @@ use App\Http\Controllers\NodeController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SocialMediaController;
-use App\Models\Node;
-use App\Services\NodesServices;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
 
 Route::get('/', [\App\Http\Controllers\LandingController::class, 'index'])->name('landing');
@@ -35,7 +32,3 @@ Route::middleware('auth')->group(function () {
 require __DIR__ . '/auth.php';
 
 Route::get('/{page:title}', [PageController::class, 'show'])->name('page.show');
-
-Route::fallback(function () {
-    return redirect()->route('landing');
-});

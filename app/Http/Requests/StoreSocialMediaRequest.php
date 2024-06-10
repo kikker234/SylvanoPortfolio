@@ -24,7 +24,6 @@ class StoreSocialMediaRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:255'],
             'url' => ['required', 'string', 'max:255'],
-            'icon' => ['required', 'string', 'max:255'],
         ];
     }
 }

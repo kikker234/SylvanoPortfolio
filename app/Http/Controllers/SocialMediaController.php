@@ -32,11 +32,15 @@ class SocialMediaController extends Controller
      */
     public function store(StoreSocialMediaRequest $request)
     {
-        error_log('Creating Social Media');
+        $icon = $request->name;
+        $icon = strtolower($icon);
+        $icon = str_replace(' ', '-', $icon);
 
-        SocialMedia::insert($request->validated());
-
-        error_log('Social Media Created');
+        SocialMedia::insert([
+            'name' => $request->name,
+            'url' => $request->url,
+            'icon' => $icon,
+        ]);
     }
 
     /**
