@@ -59,6 +59,13 @@ class HandleInertiaRequests extends Middleware
 
     private function getPages()
     {
-        return Page::all()->map->only('id', 'title');
+        $pages = Page::all()->map->only('id', 'title');
+
+        $pages->push([
+            'id' => '-1',
+            'title' => 'Portfolio',
+        ]);
+
+        return $pages;
     }
 }

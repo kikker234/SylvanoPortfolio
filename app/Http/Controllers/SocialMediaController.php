@@ -15,7 +15,7 @@ class SocialMediaController extends Controller
     public function index()
     {
         return Inertia::render('Admin/SocialMedia', [
-            'social-media' => SocialMedia::all(),
+            'socialMedia' => SocialMedia::all(),
         ]);
     }
 

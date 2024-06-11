@@ -6,6 +6,7 @@ import ApplicationLogo from "@/Components/ApplicationLogo.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import GlassCard from "@/Components/GlassCard.vue";
 import Page from "@/types/Page";
+import Navbar from "@/Components/Navbar.vue";
 
 const page = usePage();
 const background = computed(() => page.props.background);
@@ -23,26 +24,7 @@ const customPages: Page[] = page.props.pages as Page[];
 <template>
 
     <div class="custom-bg min-h-screen flex flex-col">
-        <GlassCard>
-
-            <nav class="p-4">
-                <div class="flex justify-between">
-                    <ApplicationLogo class="w-24"/>
-
-                    <div class="flex items-center">
-                        <PrimaryButton>
-                            <Link href="/">Portfolio</Link>
-                        </PrimaryButton>
-
-                        <Link class="mx-2" v-for="page in customPages" :key="page.id" :href="route('page.show', page.title)">
-                            <PrimaryButton>
-                                {{ page.title }}
-                            </PrimaryButton>
-                        </Link>
-                    </div>
-                </div>
-            </nav>
-        </GlassCard>
+        <Navbar />
 
         <div class="flex-grow">
             <slot></slot>

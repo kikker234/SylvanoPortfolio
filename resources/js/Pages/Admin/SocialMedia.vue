@@ -4,8 +4,13 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import SocialMediaModal from "@/Modal/SocialMedia/SocialMediaModal.vue";
 import {ref} from "vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
+import SocialMedia   from "@/Components/SocialMedia.vue";
 
 const isOpen = ref(false);
+
+const props = defineProps<{
+    socialMedia: any[]
+}>();
 
 const editSocialMedia = () => {
     console.log('edit social media')
@@ -31,6 +36,10 @@ const closeModal = () => {
                 <PrimaryButton @click="createSocialMedia">Create</PrimaryButton>
             </div>
         </template>
+
+        <div class="">
+            <SocialMedia v-for="media in socialMedia" :socialMedia="media" @edit="editSocialMedia"/>
+        </div>
 
         <SocialMediaModal :on-close="closeModal" :is-open="isOpen" name="" url=""/>
     </AuthenticatedLayout>
