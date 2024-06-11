@@ -22,7 +22,7 @@ onMounted(() => {
 
     <nav class="p-4">
         <div class="flex justify-between items-center">
-            <ApplicationLogo class="w-24"/>
+            <ApplicationLogo class="md:w-24 w-16"/>
 
             <Dropdown v-if="isScreenSmall">
                 <template #trigger>
