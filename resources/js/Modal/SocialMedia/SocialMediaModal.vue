@@ -7,10 +7,12 @@ import TextInput from "@/Components/TextInput.vue";
 import InputError from "@/Components/InputError.vue";
 import DangerButton from "@/Components/DangerButton.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
+import {watch} from "vue";
 
 const props = defineProps<{
     isOpen: boolean,
     name: string,
+    id: number,
     url: string,
     onClose: () => void
 }>();
@@ -25,19 +27,44 @@ const prepareIcon = () => {
     return props.name.toLowerCase().replace(' ', '-');
 }
 
-const save = () => {
-    console.log('save')
+const submit = () => {
+    if (props.name) {
+        update();
+    } else {
+        create();
+    }
+}
 
+const create = () => {
     form.post('/admin/social-media', {
         preserveScroll: true,
         onSuccess: () => {
-            console.log('success')
+            props.onClose();
         },
         onError: (e) => {
             console.log(e)
         }
     });
 }
+
+const update = () => {
+    form.put(`/admin/social-media/${props.id}`, {
+        preserveScroll: true,
+        onSuccess: () => {
+            props.onClose();
+        },
+        onError: (e) => {
+            console.log(e)
+        }
+    });
+}
+
+watch(() => props.isOpen, (value) => {
+    if (value) {
+        form.name = props.name;
+        form.url = props.url;
+    }
+});
 
 </script>
 
@@ -58,7 +85,7 @@ const save = () => {
 
             <div class="flex justify-end mt-2 gap-3">
                 <DangerButton :onClick="props.onClose">Cancel</DangerButton>
-                <PrimaryButton :onClick="save">Save</PrimaryButton>
+                <PrimaryButton :onClick="submit">Save</PrimaryButton>
             </div>
         </div>
     </Modal>

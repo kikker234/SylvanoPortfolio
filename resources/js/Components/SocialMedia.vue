@@ -18,16 +18,15 @@ onMounted(() => {
     iconName.value = getIconName();
 });
 
+const openLink = () => {
+    window.open(props.socialMedia.url, '_blank');
+}
+
 </script>
 
 <template>
-    <a :href="getIconName()">
-        <GlassCard class="p-3 rounded-full flex flex-col bg-white shadow-2xl aspect-square w-fit h-fit items-center justify-center">
-            <div class="flex items-center flex-col">
-                <v-icon :name="iconName" scale="1.5"/>
-                <span>{{ socialMedia.name }}</span>
-            </div>
-        </GlassCard>
+    <a @click="openLink" class="cursor-pointer">
+        <v-icon :name="iconName" scale="1.5"/>
     </a>
 </template>
 

@@ -62,16 +62,25 @@ class SocialMediaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateSocialMediaRequest $request, SocialMedia $socialMedia)
+    public function update(UpdateSocialMediaRequest $request, $id)
     {
+        $icon = $request->name;
+        $icon = strtolower($icon);
+        $icon = str_replace(' ', '-', $icon);
+
+        $socialMedia = SocialMedia::find($id);
+        $socialMedia->icon = $icon;
+
         $socialMedia->update($request->validated());
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(SocialMedia $socialMedia)
+    public function destroy($id)
     {
-        $socialMedia->delete();
+        SocialMedia::destroy($id);
+
+        return redirect()->route('social-media.index');
     }
 }
