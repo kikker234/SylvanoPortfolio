@@ -16,12 +16,18 @@ const props = defineProps<{
         id: number;
         title: string;
         content: string;
-    }
+        form_id: number;
+    },
+    forms: {
+        id: number;
+        title: string;
+    }[];
 }>();
 
 const form = useForm({
     title: props.page ? props.page.title : '',
     content: props.page ? props.page.content : '',
+    form_id: props.page && props.page.form_id ? props.page.form_id : -1,
 });
 
 const submitForm = () => {
@@ -71,7 +77,7 @@ const changes = ref(false);
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
 
-                    <form action="">
+                    <form @submit.prevent="submitForm">
                         <div class="py-4">
                             <InputLabel>Title</InputLabel>
                             <TextInput class="w-full" v-model="form.title"/>
@@ -79,11 +85,20 @@ const changes = ref(false);
                         </div>
 
                         <div class="py-4">
+                            <InputLabel>Form</InputLabel>
+
+                            <select class="w-full" v-model="form.form_id">
+                                <option :value="-1">No form</option>
+                                <option v-for="form in props.forms" :value="form.id">{{ form.title }}</option>
+                            </select>
+                        </div>
+
+                        <div class="py-4">
                             <TextEditor v-model="form.content"></TextEditor>
                         </div>
 
                         <div class="flex justify-end">
-                            <PrimaryButton @click="submitForm">Submit</PrimaryButton>
+                            <PrimaryButton type="submit">Submit</PrimaryButton>
                         </div>
                     </form>
                 </div>

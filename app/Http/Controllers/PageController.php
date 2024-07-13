@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Form;
 use App\Models\Page;
 use App\Http\Requests\StorePageRequest;
 use App\Http\Requests\UpdatePageRequest;
@@ -42,6 +43,12 @@ class PageController extends Controller
      */
     public function show(Page $page)
     {
+        $formId = $page->form_id;
+
+        if ($formId) {
+            $page->form = Form::find($formId)->with('fields')->first();
+        }
+
         return Inertia::render("CustomPage")->with([
             'page' => $page,
         ]);
@@ -54,6 +61,7 @@ class PageController extends Controller
     {
         return Inertia::render('Admin/PageEditor')->with([
             'page' => $page,
+            'forms' => Form::select("id", "title")->get()
         ]);
     }
 
@@ -62,10 +70,17 @@ class PageController extends Controller
      */
     public function update(UpdatePageRequest $request, Page $page)
     {
-        $page->update($request->validated());
+        $validated = $request->validated();
 
-        return back();
+        $page->update([
+            'title' => $validated['title'],
+            'content' => $validated['content'],
+            'form_id' => $validated['form_id'] != -1 ? $validated['form_id'] : null,
+        ]);
+
+        return redirect()->route('pages.index');
     }
+
 
     /**
      * Remove the specified resource from storage.

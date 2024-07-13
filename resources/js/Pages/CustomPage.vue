@@ -3,14 +3,25 @@
 import PortfolioLayout from "@/Layouts/PortfolioLayout.vue";
 import {Head} from "@inertiajs/vue3";
 import GlassCard from "@/Components/GlassCard.vue";
+import Form from "@/Pages/Admin/Forms/Form.vue";
 
 const props = defineProps<{
     page: {
         title: string;
         content: string;
+        form: {
+            id: number;
+            title: string;
+            fields: {
+                label: string;
+                type: string;
+                required: boolean;
+            }[];
+        };
     }
 }>();
 
+console.log(props.page.form)
 
 </script>
 
@@ -23,7 +34,12 @@ const props = defineProps<{
             <GlassCard class="rounded-lg">
                 <h1>{{ props.page.title }}</h1>
                 <div v-html="props.page.content"></div>
+
+                <div v-if="props.page.form">
+                    <Form :form="props.page.form"/>
+                </div>
             </GlassCard>
+
         </div>
     </PortfolioLayout>
 

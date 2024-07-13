@@ -29,6 +29,10 @@ const addField = () => {
         visible: true,
     };
 
+    if(!form.fields) {
+        form.fields = [];
+    }
+
     form.fields.push(field);
 };
 

@@ -24,6 +24,7 @@ class UpdatePageRequest extends FormRequest
         return [
             'title' => 'required|string|max:255',
             'content' => 'required|string',
+            'form_id' => 'nullable',
         ];
     }
 }
