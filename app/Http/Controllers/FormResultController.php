@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\FormResult;
 use App\Http\Requests\StoreFormResultRequest;
 use App\Http\Requests\UpdateFormResultRequest;
+use App\Models\FormResultField;
 
 class FormResultController extends Controller
 {
@@ -36,13 +37,25 @@ class FormResultController extends Controller
         $name = $request->name;
         $email = $request->email;
 
-        FormResult::create([
+        $formResult = FormResult::create([
             'ip_address' => $ip,
             'user_agent' => $userAgent,
             'form_id' => $formId,
             'name' => $name,
             'email' => $email,
         ]);
+
+        // insert all field values
+        foreach ($request->fields as $field) {
+            $fieldId = $field['id'];
+            $value = $field['value'];
+
+            FormResultField::create([
+                'form_result_id' => $formResult->id,
+                'form_field_id' => $fieldId,
+                'value' => $value,
+            ]);
+        }
     }
 
     /**

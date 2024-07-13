@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class FormResultField extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'form_result_id',
+        'form_field_id',
+        'value',
+    ];
 }

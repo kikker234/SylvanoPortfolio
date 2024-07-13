@@ -63,7 +63,7 @@ const submit = () => {
                     <p v-if="field.required" class="text-red-600">*</p>
                 </div>
 
-                <input class="w-full" :name="field.label" :type="field.type" :required="field.required"/>
+                <input class="w-full" @input="(e) => field.value = e.target.value" :name="field.label" :type="field.type" :required="field.required"/>
             </div>
         </div>
 
