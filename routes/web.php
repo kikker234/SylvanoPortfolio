@@ -18,6 +18,7 @@ Route::middleware(["auth", "verified"])->prefix("/admin")->group(function () {
     Route::resource('/pages', PageController::class);
     Route::resource('/social-media', SocialMediaController::class);
 
+    Route::get('/forms/results/{form}', [FormController::class, 'results'])->name('forms.results');
     Route::resource('/forms', FormController::class);
     Route::resource("/form-results", FormResultController::class);
 

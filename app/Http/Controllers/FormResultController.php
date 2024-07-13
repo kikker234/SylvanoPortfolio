@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Form;
 use App\Models\FormResult;
 use App\Http\Requests\StoreFormResultRequest;
 use App\Http\Requests\UpdateFormResultRequest;
 use App\Models\FormResultField;
+use Inertia\Inertia;
 
 class FormResultController extends Controller
 {
@@ -61,9 +63,8 @@ class FormResultController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(FormResult $formResult)
+    public function show(Form $form)
     {
-        //
     }
 
     /**

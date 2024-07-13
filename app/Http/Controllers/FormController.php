@@ -6,6 +6,7 @@ use App\Enums\FormFieldTypes;
 use App\Models\Form;
 use App\Http\Requests\StoreFormRequest;
 use App\Http\Requests\UpdateFormRequest;
+use App\Models\FormResult;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
 use Whoops\Exception\Inspector;
@@ -100,4 +101,17 @@ class FormController extends Controller
     {
         $form->delete();
     }
+
+    /**
+     * Shows the results
+     */
+    public function results(Form $form)
+    {
+        dd($form);
+
+        return Inertia::render('Admin/Forms/Show', [
+            'results' => $form->results()->with('fields')->get(),
+        ]);
+    }
+
 }

@@ -35,7 +35,9 @@ const props = defineProps<{
                             <PrimaryButton>Edit</PrimaryButton>
                         </Link>
 
-                        <PrimaryButton>Results</PrimaryButton>
+                        <Link :href="route('forms.results', form.id)">
+                            <PrimaryButton>Results</PrimaryButton>
+                        </Link>
                     </div>
                 </div>
             </div>
