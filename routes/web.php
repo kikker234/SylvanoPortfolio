@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\FormController;
+use App\Http\Controllers\FormResultController;
 use App\Http\Controllers\LookAndFeelController;
 use App\Http\Controllers\NodeController;
 use App\Http\Controllers\PageController;
@@ -15,6 +17,9 @@ Route::middleware(["auth", "verified"])->prefix("/admin")->group(function () {
     Route::resource('/nodes', NodeController::class);
     Route::resource('/pages', PageController::class);
     Route::resource('/social-media', SocialMediaController::class);
+
+    Route::resource('/forms', FormController::class);
+    Route::resource("/form-results", FormResultController::class);
 
     Route::get('/look-and-feel', [LookAndFeelController::class, 'index'])->name('look-and-feel');
     Route::post('/look-and-feel/avatar', [LookAndFeelController::class, 'uploadAvatar'])->name('look-and-feel.avatar');

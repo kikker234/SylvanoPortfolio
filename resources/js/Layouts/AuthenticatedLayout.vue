@@ -16,6 +16,7 @@ const links = [
     {href: route('pages.index'), active: route().current('pages.index'), text: 'Pages'},
     {href: route('look-and-feel'), active: route().current('look-and-feel'), text: 'Look & Feel'},
     {href: route('social-media.index'), active: route().current('social-media.index'), text: 'Social media'},
+    {href: route('forms.index'), active: route().current('forms.index'), text: 'Forms'},
 ];
 
 </script>
@@ -52,7 +53,9 @@ const links = [
 
                         <div class="hidden sm:flex sm:items-center sm:ms-6">
                             <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                <Link class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 focus:outline-none focus:border-gray-300 transition duration-150 ease-in-out" href="/" :active="false">
+                                <Link
+                                    class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 focus:outline-none focus:border-gray-300 transition duration-150 ease-in-out"
+                                    href="/" :active="false">
                                     Home
                                 </Link>
                             </div>
