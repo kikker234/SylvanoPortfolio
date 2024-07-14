@@ -14,4 +14,9 @@ class FormResultField extends Model
         'form_field_id',
         'value',
     ];
+
+    public function field()
+    {
+        return $this->belongsTo(FormField::class, 'form_field_id');
+    }
 }

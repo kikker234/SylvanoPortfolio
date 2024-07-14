@@ -15,8 +15,7 @@ class FormResult extends Model
         return $this->belongsTo(Form::class);
     }
 
-    public function fields()
-    {
+    public function results() {
         return $this->hasMany(FormResultField::class);
     }
 }

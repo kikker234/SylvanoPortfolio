@@ -105,12 +105,15 @@ class FormController extends Controller
     /**
      * Shows the results
      */
-    public function results(Form $form)
+    public function results($id)
     {
-        dd($form);
+        $results = FormResult::where('form_id', $id)
+            ->with('results')
+            ->with('results.field')
+            ->get();
 
         return Inertia::render('Admin/Forms/Show', [
-            'results' => $form->results()->with('fields')->get(),
+            'results' => $results,
         ]);
     }
 
